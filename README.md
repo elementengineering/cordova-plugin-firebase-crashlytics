@@ -17,13 +17,15 @@ This plugin supports the following platforms:
 
 # Installation
 
-`cordova plugin add cordova-plugin-firebase-crashlytics --variable ANDROID_FIREBASE_CORE_VERSION=16.0.0 --save`
+`cordova plugin add cordova-plugin-firebase-crashlytics --variable ANDROID_FIREBASE_CORE_VERSION=16.0.0 --variable FABRIC_API_KEY=XXX --variable FABRIC_API_SECRET=xxx --save`
 
 or
 
-`phonegap plugin add cordova-plugin-firebase-crashlytics --variable ANDROID_FIREBASE_CORE_VERSION=16.0.0`
+`phonegap plugin add cordova-plugin-firebase-crashlytics --variable --variable FABRIC_API_KEY=XXX --variable FABRIC_API_SECRET=xxx ANDROID_FIREBASE_CORE_VERSION=16.0.0`
 
 Omitting `FIREBASE_VERSION` will use a default value.
+
+Omit `FABRIC_API_KEY` and `FABRIC_API_SECRET` if your crashlytics are not migrated from Fabric.
 
 ## Firebase configuration
 ### Android

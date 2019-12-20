@@ -1,5 +1,6 @@
 #import <Cordova/CDVPlugin.h>
 #import <Crashlytics/Crashlytics.h>
+#import <Fabric/Fabric.h>
 
 @interface FirebaseCrashlyticsPlugin : CDVPlugin <UIAlertViewDelegate>
 

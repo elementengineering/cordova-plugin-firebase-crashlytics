@@ -12,7 +12,27 @@ var xcode = require("xcode");
 var comment = "\"Fabric.io: Crashlytics\"";
 
 module.exports = {
+    getPluginId: function () {
+        return "cordova-plugin-firebase-crashlytics";
+    },
 
+    getFabricConfig: function() {
+        var platformConfigPath = path.join("..", "..", "..", platform + ".json");
+
+        var platformConfig = require(platformConfigPath);
+
+        var pluginId = this.getPluginId();
+
+        var apiKey = platformConfig.installed_plugins[pluginId].FABRIC_API_KEY;
+        var apiSecret = platformConfig.installed_plugins[pluginId].FABRIC_API_SECRET;
+
+        var config = {
+            apiKey: apiKey,
+            apiSecret: apiSecret
+        };
+
+        return config;
+    },
     /**
      * This helper is used to add a build phase to the XCode project which runs a shell
      * script during the build process. The script executes Crashlytics run command line
@@ -20,14 +40,14 @@ module.exports = {
      * (dSYMs) so that Crashlytics can display stack trace information in it's web console.
      */
     addShellScriptBuildPhase: function (context, xcodeProjectPath) {
-
+        var fabricConfig = this.getFabricConfig();
         // Read and parse the XCode project (.pxbproj) from disk.
         // File format information: http://www.monobjc.net/xcode-project-file-format.html
         var xcodeProject = xcode.project(xcodeProjectPath);
         xcodeProject.parseSync();
 
         // Build the body of the script to be executed during the build phase.
-        var script = '"\\"${PODS_ROOT}/Fabric/run\\""';
+        var script = `"\\"\${PODS_ROOT}/Fabric/run ${fabricConfig.apiKey} ${fabricConfig.apiSecret}\\""`;
 
         // Generate a unique ID for our new build phase.
         var id = xcodeProject.generateUuid();

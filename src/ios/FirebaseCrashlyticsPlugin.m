@@ -10,6 +10,8 @@
     if(![FIRApp defaultApp]) {
         [FIRApp configure];
     }
+
+    [Fabric with:@[[Crashlytics class]]];
 }
 
 - (void)crash:(CDVInvokedUrlCommand *)command {
