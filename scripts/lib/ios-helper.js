@@ -17,7 +17,7 @@ module.exports = {
     },
 
     getFabricConfig: function() {
-        var platformConfigPath = path.join("..", "..", "..", platform + ".json");
+        var platformConfigPath = path.join("..", "..", "..", 'ios' + ".json");
 
         var platformConfig = require(platformConfigPath);
 
